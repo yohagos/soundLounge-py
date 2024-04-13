@@ -3,7 +3,9 @@ from fastapi.responses import FileResponse
 from sqlalchemy.orm import Session
 from typing import List
 
-from ..schemas.users import UserBase, UserFull
+from db.database import get_db
+from schemas.users import UserFull
+from controller.user_services import get_user_list
 
 router = APIRouter(
     prefix='/users',
@@ -11,5 +13,5 @@ router = APIRouter(
 )
 
 @router.get('', response_model=List[UserFull])
-def get_users():
-    return get_user_list()
+def get_users(db: Session = Depends(get_db)):
+    return get_user_list(db)
