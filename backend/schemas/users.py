@@ -22,10 +22,8 @@ class UserFull(BaseModel):
     password: str
     created_at: datetime
     
-    #followed_by: List[User]
     following: List[User]
     class Config:
         orm_mode = True
 
-#UserFull.update_forward_refs()
 
