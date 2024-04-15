@@ -1,15 +1,17 @@
 from sqlalchemy.orm import Session
 from datetime import datetime
+
 from schemas import users
 from models import models
+from auth.hashing import get_password_hashed
 
 def create_init_users(db: Session):
-    test_user_1 = models.User(firstname='Yosef', lastname='Yosef', username='yosef@yosef.de', password='yosefyosef', created_at=datetime.now())
-    test_user_2 = models.User(firstname='Max', lastname='Max', username='max@max.de', password='maxmax', created_at=datetime.now())
-    test_user_3 = models.User(firstname='James', lastname='James', username='james@james.de', password='james', created_at=datetime.now())
-    test_user_4 = models.User(firstname='Ben', lastname='Ben', username='ben@ben.de', password='benben', created_at=datetime.now())
-    test_user_5 = models.User(firstname='Mike', lastname='Mike', username='mike@mike.de', password='mikemike', created_at=datetime.now())
-    test_user_6 = models.User(firstname='Paddy', lastname='Paddy', username='paddy@paddy.de', password='paddypaddy', created_at=datetime.now())
+    test_user_1 = models.User(firstname='Yosef', lastname='Yosef', username='yosef@yosef.de', password=get_password_hashed('yosefyosef'), created_at=datetime.now())
+    test_user_2 = models.User(firstname='Max', lastname='Max', username='max@max.de', password=get_password_hashed('maxmax'), created_at=datetime.now())
+    test_user_3 = models.User(firstname='James', lastname='James', username='james@james.de', password=get_password_hashed('jamesjames'), created_at=datetime.now())
+    test_user_4 = models.User(firstname='Ben', lastname='Ben', username='ben@ben.de', password=get_password_hashed('benben'), created_at=datetime.now())
+    test_user_5 = models.User(firstname='Mike', lastname='Mike', username='mike@mike.de', password=get_password_hashed('mikemike'), created_at=datetime.now())
+    test_user_6 = models.User(firstname='Paddy', lastname='Paddy', username='paddy@paddy.de', password=get_password_hashed('paddypaddy'), created_at=datetime.now())
     if not check_if_user_exists(db, test_user_1):
         db.add(test_user_1)
     if not check_if_user_exists(db, test_user_2):
