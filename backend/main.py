@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from routes import users
+from routes import users, login
 
 from db.database import engine, SessionLocal
 from db.init_db import create_init_users
@@ -17,6 +17,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+app.include_router(login.router)
 app.include_router(users.router)
 
 Base.metadata.create_all(engine)
