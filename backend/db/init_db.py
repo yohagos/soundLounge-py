@@ -1,9 +1,12 @@
 from sqlalchemy.orm import Session
 from datetime import datetime
+import logging
 
 from schemas import users
 from models import models
 from auth.hashing import get_password_hashed
+
+logging.basicConfig(level=logging.info)
 
 def create_init_users(db: Session):
     test_user_1 = models.User(firstname='Yosef', lastname='Yosef', username='yosef@yosef.de', password=get_password_hashed('yosefyosef'), created_at=datetime.now())
