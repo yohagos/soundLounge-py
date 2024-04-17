@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from routes import users, login
+from routes import users, login, music
 
 from db.database import engine, SessionLocal
 from db.init_db import create_init_users
@@ -19,6 +19,7 @@ app.add_middleware(
 
 app.include_router(login.router)
 app.include_router(users.router)
+app.include_router(music.router)
 
 Base.metadata.create_all(engine)
 
