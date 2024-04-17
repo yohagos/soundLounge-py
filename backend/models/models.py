@@ -24,5 +24,6 @@ class User(Base):
     following = relationship('User', secondary='followers',
                              primaryjoin=id == Follower.user_id,
                              secondaryjoin=id == Follower.follower_id,
+                             cascade="all, delete",
                              backref='followers')
 
