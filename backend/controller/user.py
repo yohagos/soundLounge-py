@@ -7,7 +7,7 @@ import logging
 from auth.hashing import get_password_hashed
 from schemas.users import UserBase
 from models.models import User as UserModel, Follower as FollowerModel
-
+from utils.util import create_timestamp
 logging.basicConfig(level=logging.INFO)
 
 
@@ -24,7 +24,7 @@ def create_user(request: UserBase, db: Session):
         lastname=request.lastname, 
         username=request.username, 
         password=get_password_hashed(request.password),
-        created_at=datetime.now()
+        created_at=create_timestamp()
     )
     db.add(new_user)
     db.commit()

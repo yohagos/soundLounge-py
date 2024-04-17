@@ -25,8 +25,9 @@ class User(BaseModel):
     firstname: str
     lastname: str
     username: EmailStr
+    
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 class UserFull(BaseModel):
     id: int
@@ -51,7 +52,7 @@ class UserFull(BaseModel):
         return v
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
     
 
