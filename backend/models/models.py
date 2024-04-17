@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, ForeignKey, DateTime
+from sqlalchemy import Column, Integer, String, ForeignKey, DateTime, LargeBinary
 from sqlalchemy.orm import relationship
 from datetime import datetime
 
@@ -26,4 +26,18 @@ class User(Base):
                              secondaryjoin=id == Follower.follower_id,
                              cascade="all, delete",
                              backref='followers')
+    music = relationship('Music', back_populates='creator')
+    
+class Music(Base):
+    __tablename__ = 'musics'
+
+    id = Column(Integer, primary_key=True, index=True)
+    title = Column(String, nullable=False)
+    artist = Column(String, nullable=False)
+    genre = Column(String, nullable=False)
+    track = Column(LargeBinary)
+    uploaded_at = Column(DateTime)
+    uploaded_by = Column(Integer, ForeignKey('users.id'))
+
+    creator = relationship('User', back_populates='music')
 
