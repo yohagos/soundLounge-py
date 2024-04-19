@@ -17,10 +17,10 @@ async def save_music(
     title: str = Form(...), artist: str = Form(...), genre: str = Form(...),
     db: Session = Depends(get_db), file: UploadFile = File(...)
 ):
-    with NamedTemporaryFile(delete=False) as temp_file:
+    """ with NamedTemporaryFile(delete=False) as temp_file:
         temp_file.write(await file.read())
         temp_file.close()
         with open(temp_file.name, 'rb') as f:
             content = f.read()
-            save_music(title, artist, genre, content, db)
+            save_music(title, artist, genre, content, db) """
     return 'Done'
